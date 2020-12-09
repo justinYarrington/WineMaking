@@ -62,53 +62,47 @@ def get_new_time_to_perform_action():
 if __name__ == '__main__':
     try:
         while True:
-            if (pag.locateOnScreen('images\\wineInCorner.png', confidence=0.9)):
-                pass
-            else:
-                print('Wine not fermenting.')
-                
-                """Check if in inventory or not, if not open it"""
-                if (pag.locateOnScreen('images\\inventoryClosed.png', confidence=0.95)):
-                    inventoryImage = pag.locateOnScreen('images\\inventoryClosed.png', confidence=0.95)
-                    clickIcon(inventoryImage)
-                
-                """Begin process of depositing good/bad wines"""
-                # Find banker and click it
-                banker = pag.locateOnScreen('images\\bankWindow.png', confidence=0.55)
-                clickIcon(banker)
+            """Check if in inventory or not, if not open it"""
+            if (pag.locateOnScreen('images\\inventoryClosed.png', confidence=0.95)):
+                inventoryImage = pag.locateOnScreen('images\\inventoryClosed.png', confidence=0.95)
+                clickIcon(inventoryImage)
+            
+            """Begin process of depositing good/bad wines"""
+            # Find banker and click it
+            banker = pag.locateOnScreen('images\\bankWindow.png', confidence=0.55)
+            clickIcon(banker)
 
-                # Deposit wines. For now we'll just do it twice since bad and good wines look the same. 
-                deposit = pag.locateOnScreen('deposit\\depositThis.png', confidence=0.9)
-                clickIcon(deposit)
-                random_wait(1, 2)
-                deposit = pag.locateOnScreen('deposit\\depositThis.png', confidence=0.9)
-                clickIcon(deposit)
+            # Deposit fermenting wines. 
+            deposit = pag.locateOnScreen('deposit\\depositThis.png', confidence=0.9)
+            clickIcon(deposit)
+            random_wait(0.5, 1)
+            deposit = pag.locateOnScreen('deposit\\depositThis.png', confidence=0.9)
+            clickIcon(deposit)
 
-                # Withdraw 14 jugs of water and 14 berries. 
-                withdraw14 = pag.locateOnScreen('images\\withdraw14.png', confidence=0.75)
-                withdraw14jugs = pag.locateOnScreen('images\\jugOfWater.png', confidence=0.9)
-                withdraw14berries = pag.locateOnScreen('images\\berries.png', confidence=0.9)
-                rightclickIcon(withdraw14jugs)
-                withdraw14 = pag.locateOnScreen('images\\withdraw14.png', confidence=0.95)
-                clickIcon(withdraw14)
-                rightclickIcon(withdraw14berries)
-                withdraw14 = pag.locateOnScreen('images\\withdraw14.png', confidence=0.95)
-                clickIcon(withdraw14)
-                
+            # Withdraw 14 jugs of water and 14 berries. 
+            withdraw14jugs = pag.locateOnScreen('images\\jugOfWater.png', confidence=0.95)
+            withdraw14berries = pag.locateOnScreen('images\\berries.png', confidence=0.9)
+            rightclickIcon(withdraw14jugs)
+            withdraw14 = pag.locateOnScreen('images\\withdraw14.png', confidence=0.95)
+            clickIcon(withdraw14)
+            rightclickIcon(withdraw14berries)
+            withdraw14 = pag.locateOnScreen('images\\withdraw14.png', confidence=0.95)
+            clickIcon(withdraw14)
+            
 
-                # close out of the bank
-                closeBank = pag.locateOnScreen('images\\closeBank.png', confidence=0.9)
-                clickIcon(closeBank)
+            # close out of the bank
+            closeBank = pag.locateOnScreen('images\\closeBank.png', confidence=0.9)
+            clickIcon(closeBank)
 
-                #begin process of making wines
-                clickJugOfWater = pag.locateOnScreen('images\\waterInInventory.png', confidence=0.9)
-                clickBerries = pag.locateOnScreen('images\\berryInInventory.png', confidence=0.9)
-                clickIcon(clickJugOfWater)
-                clickIcon(clickBerries)
-                random_wait(1, 2)
-                makeWines = pag.locateOnScreen('images\\clickWineJug.png', confidence=0.9)
-                clickIcon(makeWines)
-                random_wait(35, 40)
+            #begin process of making wines
+            clickJugOfWater = pag.locateOnScreen('images\\waterInInventory.png', confidence=0.9)
+            clickBerries = pag.locateOnScreen('images\\berryInInventory.png', confidence=0.9)
+            clickIcon(clickJugOfWater)
+            clickIcon(clickBerries)
+            random_wait(1, 2)
+            makeWines = pag.locateOnScreen('images\\clickWineJug.png', confidence=0.9)
+            clickIcon(makeWines)
+            random_wait(17, 20)
 
     except KeyboardInterrupt:
         sys.exit()
